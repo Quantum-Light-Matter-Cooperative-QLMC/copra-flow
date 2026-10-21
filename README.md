@@ -1,153 +1,147 @@
 # COPRA Flow: Trace-Conditioned Flow Refinement for Robust Ultrafast Pulse Retrieval
 
-Trace-conditioned flow refinement for robust ultrafast pulse retrieval from
-transient-grating frequency-resolved optical gating (TG-FROG) measurements.
-COPRA retrieves a complex electric field; a conditional flow model then
-refines that field using the measured trace as context.
+COPRA Flow reconstructs ultrafast laser pulses from transient-grating
+frequency-resolved optical gating (TG-FROG) measurements. It starts with a
+complex electric field retrieved by COPRA, then uses a learned flow model to
+refine the field, guided by the measured trace.
 
-## Install
+This repository includes everything needed to generate synthetic training
+data, train the model, and reconstruct pulses from new measurements.
 
-Python 3.10–3.12 is supported; Python 3.12 is the tested reference interpreter.
-One package includes generation, training, inference, and evaluation. The exact
-report implementation of `pypret` is bundled; no separate checkout is needed.
+**Model weights and training data:** download links are coming soon. You can
+already generate your own data, train a model, or try the installation check
+below without downloading either.
+
+## Getting started
+
+Use Python 3.10–3.12; Python 3.12 is recommended. Install with
+[uv](https://docs.astral.sh/uv/getting-started/installation/):
 
 ```bash
+git clone https://github.com/atalnarayan/copra-flow.git
+cd copra-flow
 uv sync --locked
 uv run copra-flow --help
 ```
 
-For a pip installation in a virtual environment:
+The installation includes PyTorch and the `pypret` physics library. CPU and
+Apple Silicon are supported out of the box. For an NVIDIA GPU, follow the
+[CUDA setup instructions](docs/training.md#reference-training) first.
+
+To check that everything works on your machine:
 
 ```bash
-python -m pip install .
-```
-
-PyTorch 2.5.1 is pinned to the report version. CPU and Apple MPS use the normal
-installation. For CUDA training, see [training instructions](docs/training.md).
-
-## Run the pretrained model
-
-Model and dataset hosting is being prepared separately from this code release.
-Until artifact links are published, place the report checkpoint at
-`checkpoints/report.pt`. Inference does **not** require the training dataset.
-
-First create a synthetic input measurement:
-
-```bash
-uv run copra-flow example --out data/example.npz
-uv run copra-flow infer --config configs/inference_report.json \
-  --checkpoint checkpoints/report.pt --input data/example.npz \
-  --out-dir runs/example
-```
-
-This runs COPRA and 64 Euler refinement steps, then writes `prediction.npz` and
-`metrics.json`. The NPZ contains the measured and reconstructed traces, COPRA
-and refined complex fields, physical axes, carrier wavelength, and metadata.
-There is no ground-truth field in the input and none is required by inference.
-
-For a native experimental trace in the documented wavelength-delay text format:
-
-```bash
-uv run copra-flow prepare --input measurement.txt --out data/prepared.npz
-uv run copra-flow infer --checkpoint checkpoints/report.pt \
-  --input data/prepared.npz --out-dir runs/measurement
-```
-
-To refine a COPRA field you already computed, add `--source-field source.npy`
-(or a `.npz` containing `field`). The field must share the input's temporal
-grid. See [input formats](docs/data_format.md) and [inference](docs/inference.md).
-
-## Verify the code without downloading model weights or a dataset
-
-```bash
-uv run pytest -q
 uv run python scripts/verify_release.py
 ```
 
-The verification script generates four synthetic pulse shards, checks resumable
-generation, trains a small model for two epochs with real optimizer updates,
-reloads its checkpoint, evaluates and saves predictions, plots comparisons,
-and runs both Euler and RK4 inference plus the supplied-COPRA-field route.
-Logs and a machine-readable summary are written to `verification/smoke/`.
-The small model verifies execution; it is not the trained report model.
+This creates a tiny dataset, trains a small model, and runs evaluation and
+inference. Results and logs are saved in `verification/smoke/`. This is a
+workflow check; the small model is not intended for pulse reconstruction.
 
-## Generate the training data
+## Reconstruct a pulse
 
-```bash
-uv run copra-flow generate --config configs/dataset_report.json
-uv run copra-flow splits --data-dir data/flow_matching_10k \
-  --out data/flow_matching_10k/splits.json
-uv run copra-flow inspect --data-dir data/flow_matching_10k
-```
+You need a trained checkpoint and a TG-FROG measurement. The training dataset
+is not needed for inference. In the examples below, save your checkpoint as
+`checkpoints/copra-flow.pt`.
 
-The report dataset contains 10,000 independent pulses from 17 families, with
-30 reconstruction candidates per pulse. It uses a 256-point temporal grid at
-2.5 fs spacing, TG-FROG, 1% Gaussian trace noise with nonnegative clipping,
-and 400 COPRA iterations. Generation is resumable. Changing a generation
-setting requires a new output directory; do not mix configurations.
-
-## Train
+Start with a synthetic measurement:
 
 ```bash
-uv run copra-flow train --config configs/train_report.json
+uv run copra-flow example --out data/example.npz
+uv run copra-flow infer --checkpoint checkpoints/copra-flow.pt \
+  --input data/example.npz --out-dir runs/example
 ```
 
-The report configuration trains on 270,000 pairs from 9,000 pulses and
-validates on 30,000 pairs from 1,000 disjoint pulses. It uses 50 epochs, batch
-size 64, AdamW at learning rate 0.0003, and CUDA mixed precision where available.
-The reported run took approximately 12 hours on one A100 40 GB GPU.
+The command runs COPRA followed by 64 flow refinement steps. It saves:
 
-Commands accept explicit overrides after JSON defaults, for example
-`--epochs 1 --workers 0 --device cpu --no-amp --out-dir runs/debug`.
-See [training](docs/training.md) for small runs and saved artifacts.
+- `prediction.npz`: the initial and refined complex fields, measured and
+  reconstructed traces, and physical axes.
+- `metrics.json`: trace agreement metrics and run settings.
 
-## Reproduce the main result
+For an experimental measurement in wavelength-delay text format, prepare it
+first, then run inference:
+
+```bash
+uv run copra-flow prepare --input measurement.txt --out data/prepared.npz
+uv run copra-flow infer --checkpoint checkpoints/copra-flow.pt \
+  --input data/prepared.npz --out-dir runs/measurement
+```
+
+No ground-truth pulse is required. Inputs use a 256-point temporal grid with
+2.5 fs spacing. See [measurement formats](docs/data_format.md) for the required
+text and NPZ layouts, and the [inference guide](docs/inference.md) for options
+such as refining an existing COPRA field.
+
+## Train your own model
+
+Generate the synthetic dataset:
+
+```bash
+uv run copra-flow generate --out-dir data/flow_matching_10k --workers 4
+```
+
+The default dataset contains 10,000 pulses from 17 pulse families, with 30
+reconstruction candidates per pulse. Generation uses 1% trace noise and 400
+COPRA iterations per pulse, so allow time for it to finish. You can rerun the
+same command to resume interrupted generation.
+
+Train using the supplied split of 9,000 training pulses and 1,000 validation
+pulses:
+
+```bash
+uv run copra-flow train --data-dir data/flow_matching_10k \
+  --split-file reproduction/selections/synthetic_split.json \
+  --out-dir runs/copra-flow --amp
+```
+
+Training defaults to 50 epochs, a batch size of 64, and the AdamW optimizer
+with a learning rate of 0.0003. Mixed precision is used on CUDA; CPU and Apple
+MPS use full precision. Each run saves its settings, training history, and
+`checkpoints/best.pt` and `checkpoints/last.pt` inside the output directory.
+Use `best.pt` for inference.
+
+The [training guide](docs/training.md) covers smaller runs, custom datasets,
+and configuration options. Use a new output directory when changing dataset
+generation settings or starting another training run.
+
+## Evaluate the model
+
+To reproduce the paper's synthetic benchmark, use the matching checkpoint
+and dataset:
 
 ```bash
 uv run python reproduction/synthetic_benchmark.py \
-  --checkpoint checkpoints/report.pt --data-dir data/flow_matching_10k \
-  --out-dir runs/report_benchmark
+  --checkpoint checkpoints/copra-flow.pt --data-dir data/flow_matching_10k \
+  --out-dir runs/benchmark
 ```
 
-This evaluates the fixed **1,000 validation pulses using final COPRA sources**,
-saves reusable predictions, calculates the report metrics, and compares them
-against the archived numerical reference. It uses 64 Euler steps and the
-explicit pulse split supplied with this repository.
+The benchmark evaluates the fixed 1,000-pulse validation set, saves predictions,
+and compares the metrics with the reference results.
 
-| Method | Mean Pulse MAE | Mean Trace SSIM |
+| Method | Mean pulse MAE ↓ | Mean trace SSIM ↑ |
 | --- | ---: | ---: |
 | COPRA | 0.4685 | 0.9709 |
 | COPRA + direct Hann | 0.3345 | 0.8207 |
 | COPRA Flow | 0.0674 | 0.9103 |
 
-These are validation results: this partition also selected the checkpoint.
-Flow improves pulse recovery but does not enforce trace consistency.
-Experimental amplitude roughness measures smoothness, not recovery accuracy.
-Read [reproducibility and limitations](docs/reproducibility.md) before comparing
-results or applying the method to a new measurement domain.
+COPRA Flow improves pulse recovery on this dataset, although the refined
+field can have lower agreement with the measured trace. These are validation
+results; the same split was used to select the checkpoint. The experimental
+workflow also runs, but its historical numerical results do not reproduce
+exactly. See [reproducibility and limitations](docs/reproducibility.md) for
+details and [verification results](docs/verification.md) for completed checks.
 
-## Repository layout
+## Where to find things
 
-- `src/pnp_copra/`: pulse generation, retrieval, model, training and inference.
-- `src/pypret/`: bundled physics and COPRA implementation.
-- `configs/`: executable report settings.
-- `reproduction/`: fixed selections, reference metrics and benchmark script.
-- `scripts/verify_release.py`: independent end-to-end execution check.
-- `tests/`: numerical, input-validation and workflow tests.
-- `docs/`: formats, usage and scientific conventions.
+- [Source code](src/pnp_copra): dataset generation, retrieval, training, and inference.
+- [Configurations](configs): settings for generation, training, and inference.
+- [Benchmarks](reproduction): evaluation scripts, fixed splits, and reference results.
+- [Documentation](docs): input formats, usage guides, and scientific conventions.
+- [Tests](tests): run with `uv run pytest -q`.
 
-The internal `pnp_copra` name preserves compatibility with the research
-implementation. Use `copra-flow` as the public command. Generated data,
-checkpoints, run outputs, historical experiments, and raw experimental
-measurements are excluded from the code repository.
+## License and citation
 
-## Attribution and license
-
-Code is provided under the MIT license; see [LICENSE](LICENSE) and
-[third-party notices](THIRD_PARTY_NOTICES.md). Dataset and model licenses are
-specified with their separate releases. Cite the report using `CITATION.cff`.
-
-The full synthetic benchmark passes against the report reference. The ten-trace
-experimental workflow runs, but its historical table does not match exactly
-when the original scripts are rerun today. The controlled port comparisons and
-new metrics are recorded in [reproducibility notes](docs/reproducibility.md).
+The code is available under the [MIT license](LICENSE). See
+[third-party notices](THIRD_PARTY_NOTICES.md) for bundled dependencies.
+Model weights and datasets will include their own license information when
+released. Citation metadata is available in [CITATION.cff](CITATION.cff).
