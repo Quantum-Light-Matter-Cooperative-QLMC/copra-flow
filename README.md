@@ -1,12 +1,9 @@
-# COPRA Flow
+# COPRA Flow: Trace-Conditioned Flow Refinement for Robust Ultrafast Pulse Retrieval
 
 Trace-conditioned flow refinement for robust ultrafast pulse retrieval from
 transient-grating frequency-resolved optical gating (TG-FROG) measurements.
 COPRA retrieves a complex electric field; a conditional flow model then
 refines that field using the measured trace as context.
-
-This is the curated code release for **COPRA Flow: Trace-Conditioned Flow
-Refinement for Robust Ultrafast Pulse Retrieval**.
 
 ## Install
 
