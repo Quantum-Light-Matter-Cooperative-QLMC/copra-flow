@@ -1,0 +1,11 @@
+{
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "maxiter": 400,
+  "alpha": 0.25,
+  "steps": 64,
+  "device": "auto"
+}

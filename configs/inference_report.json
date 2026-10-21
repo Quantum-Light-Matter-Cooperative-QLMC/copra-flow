@@ -1,0 +1,8 @@
+{
+  "steps": 64,
+  "method": "euler",
+  "device": "auto",
+  "maxiter": 400,
+  "alpha": 0.25,
+  "seed": 11
+}

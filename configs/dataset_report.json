@@ -1,0 +1,16 @@
+{
+  "alpha": 0.25,
+  "count": 10000,
+  "denoise_snapshot_limit": 2,
+  "grid_dt": 2.5e-15,
+  "grid_n": 256,
+  "hard_negatives_per_pulse": 8,
+  "include_initial_guess": false,
+  "include_pnp": false,
+  "maxiter": 400,
+  "noise": 0.01,
+  "seed": 42,
+  "snapshot_stride": 25,
+  "workers": 4,
+  "out_dir": "data/flow_matching_10k"
+}

@@ -1,0 +1,161 @@
+{
+  "research_revision": "274ca31",
+  "files": {
+    "src/pnp_copra/__init__.py": {
+      "source": "package/src/pnp_copra/__init__.py",
+      "source_sha256": "43760a11c59ff2ebb56c17b52803586734fca047cac2f3155790d02515d3ebdb"
+    },
+    "src/pnp_copra/pulse_catalog.py": {
+      "source": "package/src/pnp_copra/pulse_catalog.py",
+      "source_sha256": "a3c73401d7b89df1fcb6e182196708db2a97c3e4a386db3ecc46128cefdc15b7"
+    },
+    "src/pnp_copra/retrieval.py": {
+      "source": "package/src/pnp_copra/retrieval.py",
+      "source_sha256": "36d5a12a0308e70cd9b5d8aa25a97a02c3f3181429af07f29bbf4c3bfa76e1f4"
+    },
+    "src/pnp_copra/trace_metrics.py": {
+      "source": "package/src/pnp_copra/trace_metrics.py",
+      "source_sha256": "d11e3592db3c250b309d48391f90202f03aba2988d70c4c5e0fbc4af94c903bf"
+    },
+    "src/pnp_copra/artifacts.py": {
+      "source": "package/src/pnp_copra/artifacts.py",
+      "source_sha256": "55ee8f0ef75d5574d40eea294428fc89fa6c9e33a7df6d6dad59ed5469a59bfb"
+    },
+    "src/pnp_copra/flow_matching/__init__.py": {
+      "source": "package/src/pnp_copra/flow_matching/__init__.py",
+      "source_sha256": "0a5d089c181cfd5a7e7b20fafdaf2434730900e546f6d283df79ee5f60f0280c"
+    },
+    "src/pnp_copra/flow_matching/config.py": {
+      "source": "package/src/pnp_copra/flow_matching/config.py",
+      "source_sha256": "578f17879d62eb26633e44d3b9e02669602307469c915439dbae8f2897dbb7b3"
+    },
+    "src/pnp_copra/flow_matching/complex.py": {
+      "source": "package/src/pnp_copra/flow_matching/complex.py",
+      "source_sha256": "f0961f4fe8e3b154ff339ef0454f851b279c0594a9367b88b22fb5463245b171"
+    },
+    "src/pnp_copra/flow_matching/data.py": {
+      "source": "package/src/pnp_copra/flow_matching/data.py",
+      "source_sha256": "3bd1e6acb6ef306def196e77b5c917c3c6577f7dd6e1988ead20a252ab1f0268"
+    },
+    "src/pnp_copra/flow_matching/model.py": {
+      "source": "package/src/pnp_copra/flow_matching/model.py",
+      "source_sha256": "88121e563a0f34fc96e64f0c658436b237551498c216ebb89bdd11773a7204a3"
+    },
+    "src/pnp_copra/flow_matching/losses.py": {
+      "source": "package/src/pnp_copra/flow_matching/losses.py",
+      "source_sha256": "3ea662fd35d57fc2369c1d47bf766137c6b7d44237c2ca3e4f8a643fd3cc3a8e"
+    },
+    "src/pnp_copra/flow_matching/trainer.py": {
+      "source": "package/src/pnp_copra/flow_matching/trainer.py",
+      "source_sha256": "79958f4d9f9b1500c23c66c791643644083bc2a8e36b80b97484b70f0b47bb07"
+    },
+    "src/pnp_copra/flow_matching/sampling.py": {
+      "source": "package/src/pnp_copra/flow_matching/sampling.py",
+      "source_sha256": "ae2b5eb26cff33ed473667f784aa814fe1f13b2d73c003be30be025d0d2dc759"
+    },
+    "src/pnp_copra/flow_matching/inspection.py": {
+      "source": "package/src/pnp_copra/flow_matching/inspection.py",
+      "source_sha256": "52d8a3f44fae5545e8f887a96e07d0d5da01cbb2a6d3b645d7a059e5a55e03ac"
+    },
+    "src/pnp_copra/flow_matching/evaluate.py": {
+      "source": "package/src/pnp_copra/flow_matching/evaluate.py",
+      "source_sha256": "5d33c8eca5c8ba9abf23faab0fa5e44ba07c62b4d1666ac697da070aea92c5c4"
+    },
+    "src/pnp_copra/flow_matching/metrics.py": {
+      "source": "package/src/pnp_copra/flow_matching/metrics.py",
+      "source_sha256": "a4817f5d879eab250dad1a1ed1ed75c220fdfa1305855c33e4a6cf27eb410239"
+    },
+    "src/pnp_copra/flow_matching/prediction_artifacts.py": {
+      "source": "package/src/pnp_copra/flow_matching/prediction_artifacts.py",
+      "source_sha256": "f291f5072b00714b88080b5422e985d5796417807e0e407bbd999eb2757804d1"
+    },
+    "src/pnp_copra/flow_matching/visualization.py": {
+      "source": "package/src/pnp_copra/flow_matching/visualization.py",
+      "source_sha256": "5c9a80c9b229c0d8b6ea23afa5cac4eadee8b8d47cf8578bc9bf512814e0d55d"
+    },
+    "src/pnp_copra/flow_matching/cli.py": {
+      "source": "package/src/pnp_copra/flow_matching/cli.py",
+      "source_sha256": "40459dc0f1d2326f8c93b1335dd7c1da7bc8a5e272e4c7448f4a766b7629ea02"
+    },
+    "src/pypret/pulse.py": {
+      "source": "pypret/pypret/pulse.py",
+      "source_sha256": "5d2243c138dc22312aad58088bf4d6031bf8e18a6350294982634cedd281e212"
+    },
+    "src/pypret/graphics.py": {
+      "source": "pypret/pypret/graphics.py",
+      "source_sha256": "c56eaa5ebb316006e09135ed45d7758359fc1d659af8bcd1bee81073c74a660a"
+    },
+    "src/pypret/material.py": {
+      "source": "pypret/pypret/material.py",
+      "source_sha256": "7f4ac8fbe57e314623812a587f712e48ff17c9a1a0eef867240f42a6a8579f37"
+    },
+    "src/pypret/pulse_error.py": {
+      "source": "pypret/pypret/pulse_error.py",
+      "source_sha256": "b4683e3e297357b2f71e98cb59de24071d49f5c4de67d664b407751b9842de93"
+    },
+    "src/pypret/lib.py": {
+      "source": "pypret/pypret/lib.py",
+      "source_sha256": "bb805100e1ab831bd4ed8f5b9f4e344886432e6d7cca6f5c79f3aa5d4a15c5fa"
+    },
+    "src/pypret/__init__.py": {
+      "source": "pypret/pypret/__init__.py",
+      "source_sha256": "2d37888d002778a1607ac8a51acfd024eb33fc226359c0fe5d24672c484d82a5"
+    },
+    "src/pypret/mesh_data.py": {
+      "source": "pypret/pypret/mesh_data.py",
+      "source_sha256": "367013fb5c5e7406f1a7cbb6aa1a5d3dc4e1c1ef7e6bca883384a4ce0d2f9584"
+    },
+    "src/pypret/autocorrelation.py": {
+      "source": "pypret/pypret/autocorrelation.py",
+      "source_sha256": "0dd58c4b9a5a717d286356dc2683fd09e53dcf9aaa372fd3d35efdb8c78f9f2e"
+    },
+    "src/pypret/random_pulse.py": {
+      "source": "pypret/pypret/random_pulse.py",
+      "source_sha256": "1e20ccdef3a39393c01c85a0b2e2ac4069b864942420417d945a73346abc5452"
+    },
+    "src/pypret/fourier.py": {
+      "source": "pypret/pypret/fourier.py",
+      "source_sha256": "510eb9e87ce728727f6d716b615ec7230b83cb405f845c71d833e76753afc577"
+    },
+    "src/pypret/pnps.py": {
+      "source": "pypret/pypret/pnps.py",
+      "source_sha256": "e524e67820ffa0d666f1799879a4b467ad49dbfbb2fdbcb80039a80d3ece5d85"
+    },
+    "src/pypret/frequencies.py": {
+      "source": "pypret/pypret/frequencies.py",
+      "source_sha256": "727dff00674f8e079bc795000163e4fec4c9719262824ff5c27f42efb99d4655"
+    },
+    "src/pypret/io/options.py": {
+      "source": "pypret/pypret/io/options.py",
+      "source_sha256": "85cd10917cda1edc4f7728bb046c35db77e5741898d82949962d0f92f85ba970"
+    },
+    "src/pypret/io/io.py": {
+      "source": "pypret/pypret/io/io.py",
+      "source_sha256": "60767a5b3979727fc0f28ff50999e657e076ad780b440b9efc3014186500ad6f"
+    },
+    "src/pypret/io/handlers.py": {
+      "source": "pypret/pypret/io/handlers.py",
+      "source_sha256": "7a72d1647fd126d5cf08a732f9ef464235078965880e02582e38f9d433653b78"
+    },
+    "src/pypret/io/__init__.py": {
+      "source": "pypret/pypret/io/__init__.py",
+      "source_sha256": "7de812f933f25d605f86961342c6061a8d7a11738531e9c9ef98051a7fa9f518"
+    },
+    "src/pypret/retrieval/nlo_retriever.py": {
+      "source": "pypret/pypret/retrieval/nlo_retriever.py",
+      "source_sha256": "b2d5ffd75dae55e289c0e2ecabf7847e6d5e83eaf2c8083a93b4ef9f2353a29c"
+    },
+    "src/pypret/retrieval/retriever.py": {
+      "source": "pypret/pypret/retrieval/retriever.py",
+      "source_sha256": "2457d0af1ab2d5a016c0c016bb7a9672e91f402232cc30d2ba508bc45bb4f7a5"
+    },
+    "src/pypret/retrieval/__init__.py": {
+      "source": "pypret/pypret/retrieval/__init__.py",
+      "source_sha256": "0613adedee1e2cbe380103044862a669695a26cdda494296900d15b14dba74a4"
+    },
+    "src/pypret/retrieval/step_retriever.py": {
+      "source": "pypret/pypret/retrieval/step_retriever.py",
+      "source_sha256": "08b61e92fea9ab85a7e020336b4c32193d23b7877147c242e1c7c169baabe3c1"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "dataset": {
+    "data_dir": "data/flow_matching_10k",
+    "include_hard_negatives": true,
+    "max_source_weight": 5.0,
+    "seed": 42,
+    "source_mode": "all",
+    "trace_transform": "sqrt",
+    "use_source_weights": true,
+    "validation_fraction": 0.1,
+    "split_file": "data/flow_matching_10k/splits.json"
+  },
+  "loss": {
+    "path_noise_std": 0.0,
+    "time_eps": 0.0001
+  },
+  "model": {
+    "condition_dim": 256,
+    "condition_on_source": false,
+    "dropout": 0.0,
+    "field_length": 256,
+    "hidden_channels": 128,
+    "residual_blocks": 8,
+    "time_embedding_dim": 128,
+    "trace_base_channels": 24,
+    "trace_layers": 4
+  },
+  "training": {
+    "amp": true,
+    "batch_size": 64,
+    "checkpoint_every": 1,
+    "compile_model": false,
+    "device": "auto",
+    "epochs": 50,
+    "grad_clip_norm": 1.0,
+    "learning_rate": 0.0003,
+    "log_every": 25,
+    "max_train_batches": null,
+    "max_val_batches": null,
+    "num_workers": 4,
+    "out_dir": "runs/report",
+    "seed": 42,
+    "validate_every": 1,
+    "weight_decay": 0.0001
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "reference": "Final capstone report, ten experimental traces, mean across paired seeds 11/29/47",
+  "traces": 10,
+  "seeds": [
+    11,
+    29,
+    47
+  ],
+  "metrics_rounded_to": 6,
+  "summary": {
+    "copra": {
+      "trace_nrmse": 0.013481,
+      "trace_ssim": 0.910208,
+      "roughness": 0.17912
+    },
+    "pnp": {
+      "trace_nrmse": 0.01406,
+      "trace_ssim": 0.925819,
+      "roughness": 0.15954
+    },
+    "flow": {
+      "trace_nrmse": 0.014705,
+      "trace_ssim": 0.919202,
+      "roughness": 0.08734
+    }
+  }
+}

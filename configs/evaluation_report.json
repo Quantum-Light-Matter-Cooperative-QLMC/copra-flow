@@ -1,0 +1,9 @@
+{
+  "split": "val",
+  "source_kind": "copra_final",
+  "steps": 64,
+  "method": "euler",
+  "batch_size": 64,
+  "workers": 4,
+  "trace_metrics": true
+}

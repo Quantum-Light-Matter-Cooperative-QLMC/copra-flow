@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite the COPRA Flow capstone report when using this code."
+title: "COPRA Flow: Trace-Conditioned Flow Refinement for Robust Ultrafast Pulse Retrieval"
+type: software
+version: 0.1.0
+authors:
+  - family-names: Sahu
+    given-names: Atal Narayan
+preferred-citation:
+  type: report
+  title: "COPRA Flow: Trace-Conditioned Flow Refinement for Robust Ultrafast Pulse Retrieval"
+  authors:
+    - family-names: Sahu
+      given-names: Atal Narayan
+  institution:
+    name: University of California, Los Angeles
+  date-published: 2026-09-07
+  notes: "MQST Capstone Report; in collaboration with Abhimanyu Borthakur and Sergio Carbajo."

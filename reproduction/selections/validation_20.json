@@ -1,0 +1,122 @@
+[
+  {
+    "pulse_uid": "pulse_04194_airy_5ac04ecb",
+    "family": "airy",
+    "copra_final_mae": 0.1616319005691195,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_00678_asymmetric_tail_e5c6306b",
+    "family": "asymmetric_tail",
+    "copra_final_mae": 0.15478134241482228,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_07871_biexponential_134835dc",
+    "family": "biexponential",
+    "copra_final_mae": 0.09703965313306512,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_01603_double_pulse_be93b6bc",
+    "family": "double_pulse",
+    "copra_final_mae": 0.15014835570626173,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_02469_gaussian_a56c5d50",
+    "family": "gaussian",
+    "copra_final_mae": 0.19535684276465545,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_01157_lorentzian_16b64d69",
+    "family": "lorentzian",
+    "copra_final_mae": 0.1712040362160916,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_00411_phase_step_24ad2b51",
+    "family": "phase_step",
+    "copra_final_mae": 0.157489155130207,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_08120_pulse_train_51f8fc3d",
+    "family": "pulse_train",
+    "copra_final_mae": 0.1490222296974581,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_07686_random_mixture_2c68b367",
+    "family": "random_mixture",
+    "copra_final_mae": 0.1501820399946575,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_06090_random_spectral_34994454",
+    "family": "random_spectral",
+    "copra_final_mae": 0.05656163151489729,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_09949_sech_480ffcdf",
+    "family": "sech",
+    "copra_final_mae": 0.16102268724657717,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_03771_sinc_7d05c5c9",
+    "family": "sinc",
+    "copra_final_mae": 0.1479520772192107,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_08144_sinusoidal_phase_291164fc",
+    "family": "sinusoidal_phase",
+    "copra_final_mae": 0.16417789206324557,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_04819_spectral_comb_eff664e1",
+    "family": "spectral_comb",
+    "copra_final_mae": 0.16807515020976233,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_07445_spectral_hole_d76cfe2f",
+    "family": "spectral_hole",
+    "copra_final_mae": 0.18833388655733158,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_05784_spm_52da8c81",
+    "family": "spm",
+    "copra_final_mae": 0.12460335651218118,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_00816_super_gaussian_6b95f477",
+    "family": "super_gaussian",
+    "copra_final_mae": 0.1797878204652365,
+    "reason": "family representative"
+  },
+  {
+    "pulse_uid": "pulse_07563_biexponential_01734e3a",
+    "family": "biexponential",
+    "copra_final_mae": 0.0956253004763789,
+    "reason": "easy COPRA case"
+  },
+  {
+    "pulse_uid": "pulse_06030_gaussian_992b45b3",
+    "family": "gaussian",
+    "copra_final_mae": 0.2046624625791811,
+    "reason": "hard COPRA case"
+  },
+  {
+    "pulse_uid": "pulse_03348_lorentzian_ffe7b76f",
+    "family": "lorentzian",
+    "copra_final_mae": 0.5605905565967224,
+    "reason": "worst COPRA case"
+  }
+]

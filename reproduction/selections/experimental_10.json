@@ -1,0 +1,95 @@
+{
+  "selection": "five highest-SNR eligible traces per IR/UV region; frozen from report manifest",
+  "records": [
+    {
+      "uid": "ir_tg_s100_15_2fs_hr_98366fe031",
+      "spectral_region": "ir",
+      "source_sha256": "b4923150c5ac51fe163ea1a5eb488ae0b1c8267581b603ebd149bc9a9000cad0",
+      "native_shape": [
+        458,
+        1000
+      ]
+    },
+    {
+      "uid": "ir_tg_s100_hcf_input_13_chirp_hr_ntl_69f5661a23",
+      "spectral_region": "ir",
+      "source_sha256": "f84a8310e2bbc57350a1b63154c798c9a0af54b1a53799c05b59e90543660ecb",
+      "native_shape": [
+        485,
+        600
+      ]
+    },
+    {
+      "uid": "ir_tg_s100_hcf_input_12_75_tl_hr_ntl_f444dc932e",
+      "spectral_region": "ir",
+      "source_sha256": "932d47edcea8dcfa8b918d5f12c118697aae23215282e1f6d4ce9338128eff51",
+      "native_shape": [
+        360,
+        600
+      ]
+    },
+    {
+      "uid": "ir_tg_s100_hcf_input_12_35_tl_hr_ntl_87aaf39f85",
+      "spectral_region": "ir",
+      "source_sha256": "a294e96c58bbb6d26125b7b7827150843c3ce3c80684a30bdcb9dd48db833760",
+      "native_shape": [
+        485,
+        600
+      ]
+    },
+    {
+      "uid": "ir_tg_s100_16_1fs_hr_327497faa2",
+      "spectral_region": "ir",
+      "source_sha256": "22887e5bda32c85d4731bba8f4df928a84aa3625645f32bb547b3d2fa3d49f7a",
+      "native_shape": [
+        492,
+        1200
+      ]
+    },
+    {
+      "uid": "uv_tg_s100_p80_15_2fs_hr_b1d783ad80",
+      "spectral_region": "uv",
+      "source_sha256": "98046bbf33153e331bd0a3902956e956229718162f96c747f10505fb0310c40f",
+      "native_shape": [
+        320,
+        600
+      ]
+    },
+    {
+      "uid": "uv_tg_s60_p60_15_5_2fs_hr_b3215b2aac",
+      "spectral_region": "uv",
+      "source_sha256": "cca9ae33f38d1f3563fb6416bc53c7fede6d86b9028479f8c892a7b212cdc015",
+      "native_shape": [
+        320,
+        600
+      ]
+    },
+    {
+      "uid": "uv_tg_s100_p80_15_2fs_hr1_e23642e9fc",
+      "spectral_region": "uv",
+      "source_sha256": "f6ca8743e0a0b4399639a3ecc74a2c88a0a6759a49ed2420f2a3e8278e252d93",
+      "native_shape": [
+        320,
+        600
+      ]
+    },
+    {
+      "uid": "uv_tg_s60_p60_18_2fs_hr_393d2b9d07",
+      "spectral_region": "uv",
+      "source_sha256": "842032bef5552042e92c67f980647f50e976e6e41b9424d02f54730f62011f0d",
+      "native_shape": [
+        320,
+        600
+      ]
+    },
+    {
+      "uid": "uv_tg_s110_p75_ntl_2fs_1_hr_0c84cd47f7",
+      "spectral_region": "uv",
+      "source_sha256": "6862805470b3c8ff42e8699107aef3969a622a07ac41727bc82c0a9ddd1de8d6",
+      "native_shape": [
+        264,
+        600
+      ]
+    }
+  ]
+}
