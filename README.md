@@ -8,9 +8,10 @@ refine the field, guided by the measured trace.
 This repository includes everything needed to generate synthetic training
 data, train the model, and reconstruct pulses from new measurements.
 
-**Model weights and training data:** download links are coming soon. You can
-already generate your own data, train a model, or try the installation check
-below without downloading either.
+**Downloads:** [trained model](https://huggingface.co/atal-narayan/copra-flow)
+and [training dataset](https://huggingface.co/datasets/atal-narayan/copra-flow-tg-frog)
+are available on Hugging Face. See the [download guide](docs/downloads.md)
+for versioned downloads, checksums, and dataset extraction.
 
 ## Getting started
 
@@ -41,8 +42,13 @@ workflow check; the small model is not intended for pulse reconstruction.
 ## Reconstruct a pulse
 
 You need a trained checkpoint and a TG-FROG measurement. The training dataset
-is not needed for inference. In the examples below, save your checkpoint as
-`checkpoints/copra-flow.pt`.
+is not needed for inference. Install the Hugging Face CLI and download the
+checkpoint:
+
+```bash
+uv tool install huggingface_hub
+hf download atal-narayan/copra-flow copra-flow.pt --revision v0.1.0 --local-dir checkpoints
+```
 
 Start with a synthetic measurement:
 
@@ -74,7 +80,15 @@ such as refining an existing COPRA field.
 
 ## Train your own model
 
-Generate the synthetic dataset:
+Download and extract the dataset (approximately 3.8 GB):
+
+```bash
+hf download atal-narayan/copra-flow-tg-frog --repo-type dataset \
+  --revision v0.1.0 --local-dir data/flow_matching_10k
+python data/flow_matching_10k/extract.py
+```
+
+Alternatively, generate it yourself:
 
 ```bash
 uv run copra-flow generate --out-dir data/flow_matching_10k --workers 4
@@ -143,5 +157,6 @@ details and [verification results](docs/verification.md) for completed checks.
 
 The code is available under the [MIT license](LICENSE). See
 [third-party notices](THIRD_PARTY_NOTICES.md) for bundled dependencies.
-Model weights and datasets will include their own license information when
-released. Citation metadata is available in [CITATION.cff](CITATION.cff).
+The [model weights](https://huggingface.co/atal-narayan/copra-flow) use MIT;
+the [synthetic dataset](https://huggingface.co/datasets/atal-narayan/copra-flow-tg-frog)
+uses CC BY 4.0. Citation metadata is available in [CITATION.cff](CITATION.cff).

@@ -45,12 +45,17 @@ One pulse UID identifies one shard. Important arrays are:
 | `time_window` | N, float32 | Trace-derived soft temporal support |
 | `source_kind`, `source_detail` | K, Unicode | Source provenance |
 | `source_weight` | K, float32 | Training loss weight |
-| `hard_negative` | K, bool | Augmentation flag |
+| `hard_negative` | K, bool | Candidate marked as difficult or augmented |
 | `mae_aligned`, `trace_error`, `trace_ssim` | K | Stored diagnostics |
 | `spec_json`, `metadata_json` | Unicode scalar | Pulse specification and generation provenance |
 
 The report uses K=30: 17 COPRA snapshots, one final COPRA field, direct Hann
 and guarded Hann final fields, two smoothed snapshots, and eight hard negatives.
+The `hard_negative` mask also flags COPRA candidates that meet diagnostic
+difficulty criteria; its count can exceed eight. The released dataset has
+80,000 generated hard-negative candidates and 115,347 flagged candidates in
+total. Use `source_kind` to distinguish generated augmentations from flagged
+COPRA reconstructions.
 Raw source arrays in a shard are not physical calibrated fields: they have the
 stored RMS normalization. Recover original scales from metadata if needed.
 Training and synthetic evaluation use target-aligned `source_fields`, whereas
