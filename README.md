@@ -6,9 +6,7 @@ COPRA retrieves a complex electric field; a conditional flow model then
 refines that field using the measured trace as context.
 
 This is the curated code release for **COPRA Flow: Trace-Conditioned Flow
-Refinement for Robust Ultrafast Pulse Retrieval**, the MQST capstone report
-by Atal Narayan Sahu, in collaboration with Abhimanyu Borthakur and Sergio
-Carbajo, UCLA, September 7, 2026.
+Refinement for Robust Ultrafast Pulse Retrieval**.
 
 ## Install
 
