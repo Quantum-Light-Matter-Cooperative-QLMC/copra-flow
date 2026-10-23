@@ -11,7 +11,7 @@ ROOT_FILES = {
     "README.md", "LICENSE", "CITATION.cff", "THIRD_PARTY_NOTICES.md",
     "pyproject.toml", "uv.lock", "MANIFEST.in", ".gitignore", ".gitattributes",
 }
-DIRECTORIES = {"src", "configs", "docs", "reproduction", "scripts", "examples", "tests", "third_party", ".github"}
+DIRECTORIES = {"src", "configs", "docs", "reproduction", "scripts", "examples", "assets", "tests", "third_party", ".github"}
 
 
 def source_paths(root: Path) -> list[Path]:

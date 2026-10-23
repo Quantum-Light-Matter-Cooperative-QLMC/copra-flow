@@ -13,6 +13,26 @@ and [training dataset](https://huggingface.co/datasets/atal-narayan/copra-flow-t
 are available on Hugging Face. See the [download guide](docs/downloads.md)
 for versioned downloads, checksums, and dataset extraction.
 
+## Pulse evolution
+
+Watch COPRA Flow refine representative synthetic pulses. The left panels show
+amplitude and the right panels show phase; dashed curves show the target pulse.
+The animation parameter `t` is flow time.
+
+**Gaussian and double pulses**
+
+[![COPRA Flow evolution for Gaussian and double pulses](assets/videos/featured/gaussian-pulses.gif)](assets/videos/featured/gaussian-pulses.mp4)
+
+[Full-resolution MP4](assets/videos/featured/gaussian-pulses.mp4)
+
+**SPM, pulse train, and biexponential pulses**
+
+[![COPRA Flow evolution for SPM, pulse train, and biexponential pulses](assets/videos/featured/non-gaussian-pulses.gif)](assets/videos/featured/non-gaussian-pulses.mp4)
+
+[Full-resolution MP4](assets/videos/featured/non-gaussian-pulses.mp4)
+
+[Browse all video assets](assets/videos/README.md).
+
 ## Getting started
 
 Use Python 3.10–3.12; Python 3.12 is recommended. Install with
