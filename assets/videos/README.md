@@ -5,6 +5,11 @@ from the COPRA reconstruction toward a refined field. Dashed curves show the
 known target pulse. The animation parameter `t` is flow time; the horizontal
 axes show physical time in femtoseconds.
 
+Phase is displayed only where the corresponding amplitude is at least 5% of
+that curve's own peak amplitude. The threshold is recalculated for each flow
+frame. Lower-amplitude regions are hidden from the phase plot; this display
+mask does not alter the reconstructed field.
+
 Select a video below to open its MP4 file at the original resolution.
 Animated previews of the featured compilations appear in the main README.
 
