@@ -19,10 +19,8 @@ Watch COPRA Flow refine representative synthetic pulses. The left panels show
 amplitude and the right panels show phase; dashed curves show the target pulse.
 The animation parameter `t` is flow time.
 
-Phase is shown only where a curve's amplitude is at least **5% of its own
-peak amplitude**. For the evolving field, this threshold is recalculated at
-each frame. Phase below the threshold is hidden to avoid displaying unstable
-phase in low-amplitude regions; the reconstructed field itself is unchanged.
+Phase is hidden below **5% of each curve's peak amplitude**, recalculated
+at each frame to suppress unstable phase in low-amplitude regions.
 
 **Gaussian and double pulses**
 
