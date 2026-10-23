@@ -17,7 +17,7 @@ envelopes; amplitude is `abs(field)` and intensity is `abs(field)**2`.
 
 `trace_linear` is accepted as an alias for `measured_trace`. Absolute angular
 frequencies are also accepted if subtracting the carrier gives the exact model
-grid. The report checkpoint expects N=256. Do not pass Hz, PHz, wavelength
+grid. The released checkpoint expects N=256. Do not pass Hz, PHz, wavelength
 coordinates or transposed arrays under `freq_axis`. The code checks the physical
 grid rather than silently stretching a trace.
 
@@ -49,7 +49,7 @@ One pulse UID identifies one shard. Important arrays are:
 | `mae_aligned`, `trace_error`, `trace_ssim` | K | Stored diagnostics |
 | `spec_json`, `metadata_json` | Unicode scalar | Pulse specification and generation provenance |
 
-The report uses K=30: 17 COPRA snapshots, one final COPRA field, direct Hann
+The dataset uses K=30: 17 COPRA snapshots, one final COPRA field, direct Hann
 and guarded Hann final fields, two smoothed snapshots, and eight hard negatives.
 The `hard_negative` mask also flags COPRA candidates that meet diagnostic
 difficulty criteria; its count can exceed eight. The released dataset has

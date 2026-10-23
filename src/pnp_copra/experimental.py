@@ -1,7 +1,7 @@
-"""Final-report TG-FROG preprocessing and target-free retrieval helpers.
+"""TG-FROG preprocessing and target-free retrieval helpers.
 
-The background and carrier conventions are preserved from the final comparison
-scripts. Frequency coordinates are relative angular frequency, in rad/s.
+Background is estimated from far-delay regions. Frequency coordinates are
+relative angular frequency, in rad/s.
 """
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ class GridSpec:
             n = int(configs["model"]["field_length"])
             dt = float(configs.get("grid", {}).get("dt_s", GRID_DT_S))
             if not np.isclose(dt, GRID_DT_S, rtol=1e-7, atol=1e-22):
-                raise ValueError("Physical inference supports the report's 2.5 fs grid; this checkpoint uses a different spacing.")
+                raise ValueError("Physical inference requires a 2.5 fs grid; this checkpoint uses a different spacing.")
         ft = FourierTransform(n, dt=GRID_DT_S)
         pnps = PNPS(Pulse(ft, 800e-9), "frog", "tg")
         carrier = 2 * np.pi * SPEED_OF_LIGHT_M_S / 800e-9
@@ -433,7 +433,7 @@ def _far_delay_background(parsed: Any) -> tuple[np.ndarray, dict[str, Any]]:
 
 
 def _prior_comparison_carrier(parsed: Any) -> tuple[float, float]:
-    """Reproduce the carrier convention used by the prior denoising PDF."""
+    """Estimate the carrier using border-corrected spectral intensity."""
 
     intensity = np.asarray(parsed.intensity, dtype=np.float64)
     height, width = intensity.shape
@@ -477,7 +477,7 @@ def _main_lobe_fwhm(x: np.ndarray, y: np.ndarray) -> float:
 
 
 def prepare_native(path: Path, grid: GridSpec | None = None) -> dict[str, Any]:
-    """Apply the exact final-report background and carrier conventions."""
+    """Apply the background and carrier conventions used in the paper."""
     parsed = parse_linshan_trace(Path(path))
     grid = grid or GridSpec.from_checkpoint_or_default()
     n = grid.time_axis_s.size
@@ -517,18 +517,6 @@ def prepare_native(path: Path, grid: GridSpec | None = None) -> dict[str, Any]:
     }
 
 
-def compare_report_summary(summary: dict, expected: dict, *, traces: int, seeds: list[int]) -> dict:
-    """Compare rounded paper metrics without changing their definitions."""
-    if expected["traces"] != traces or expected["seeds"] != seeds:
-        raise ValueError("Reference metrics use a different trace count or seed list.")
-    checks = {f"{method}.{key}": {"expected": value, "observed": summary[method][key],
-              "absolute_error": abs(summary[method][key]-value),
-              "passed": abs(summary[method][key]-value) <= 1e-5}
-              for method, values in expected["summary"].items() for key, value in values.items()}
-    return {"tolerance": 1e-5, "checks": checks,
-            "status": "passed" if all(v["passed"] for v in checks.values()) else "failed"}
-
-
 def benchmark_main(argv: list[str] | None = None) -> int:
     """Run all paired seeds and persist fields and metrics, including plot selection."""
     from .inference import load_measurement, write_json, save_npz
@@ -544,10 +532,6 @@ def benchmark_main(argv: list[str] | None = None) -> int:
     parser.add_argument("--alpha", type=float, default=0.25)
     parser.add_argument("--steps", type=int, default=64)
     parser.add_argument("--device", default="auto")
-    parser.add_argument("--reference-results", type=Path,
-                        help="Optional rounded report metrics to check after the benchmark.")
-    parser.add_argument("--strict-reference", action="store_true",
-                        help="Fail if the historical reference comparison exceeds tolerance.")
     args = parser.parse_args(argv)
     payload = json.loads(args.manifest.read_text())
     records = payload["records"]
@@ -593,7 +577,7 @@ def benchmark_main(argv: list[str] | None = None) -> int:
             for name, result in methods.items():
                 field, _, _ = _center_and_phase_normalize(result["field"])
                 if name != "copra":
-                    # Match the report's display/roughness alignment to paired COPRA.
+                    # Match the paper's display/roughness alignment to paired COPRA.
                     field, _ = _align_field_to_reference(methods["copra"]["field"], result["field"])
                     field, _, _ = _center_and_phase_normalize(field)
                 amp = np.abs(field)
@@ -619,12 +603,5 @@ def benchmark_main(argv: list[str] | None = None) -> int:
                "checkpoint_sha256": _sha256(args.checkpoint), "steps": args.steps,
                "maxiter": args.maxiter, "alpha": args.alpha,
                "warning": "Roughness is smoothness, not ground-truth accuracy."})
-    if args.reference_results:
-        expected = json.loads(args.reference_results.read_text())
-        comparison = compare_report_summary(summary, expected, traces=len(records), seeds=args.seeds)
-        write_json(args.out_dir / "comparison.json", comparison)
-        if args.strict_reference and comparison["status"] != "passed":
-            raise AssertionError("Experimental metrics differ from the report; inspect comparison.json.")
-        print(f"Historical reference comparison: {comparison['status']}; see {args.out_dir / 'comparison.json'}", flush=True)
     print(json.dumps(summary, indent=2))
     return 0

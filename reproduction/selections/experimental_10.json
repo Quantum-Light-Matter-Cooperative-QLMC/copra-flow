@@ -1,5 +1,5 @@
 {
-  "selection": "five highest-SNR eligible traces per IR/UV region; frozen from report manifest",
+  "selection": "Five highest-SNR eligible traces per IR/UV region used in the paper",
   "records": [
     {
       "uid": "ir_tg_s100_15_2fs_hr_98366fe031",

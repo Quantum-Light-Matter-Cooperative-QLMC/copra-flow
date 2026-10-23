@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exercise the installed CLI end to end using generated data and real training.
 
-Run from the repository root after installation. No report artifacts, network,
+Run from the repository root after installation. No pretrained weights, network,
 experimental measurements, or parent research checkout are required.
 """
 from __future__ import annotations

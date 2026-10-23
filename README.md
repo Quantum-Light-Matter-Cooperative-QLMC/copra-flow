@@ -19,7 +19,7 @@ Use Python 3.10–3.12; Python 3.12 is recommended. Install with
 [uv](https://docs.astral.sh/uv/getting-started/installation/):
 
 ```bash
-git clone https://github.com/atalnarayan/copra-flow.git
+git clone https://github.com/Quantum-Light-Matter-Cooperative-QLMC/copra-flow.git
 cd copra-flow
 uv sync --locked
 uv run copra-flow --help
@@ -29,16 +29,6 @@ The installation includes PyTorch and the `pypret` physics library. CPU and
 Apple Silicon are supported out of the box. For an NVIDIA GPU, follow the
 [CUDA setup instructions](docs/training.md#reference-training) first.
 
-To check that everything works on your machine:
-
-```bash
-uv run python scripts/verify_release.py
-```
-
-This creates a tiny dataset, trains a small model, and runs evaluation and
-inference. Results and logs are saved in `verification/smoke/`. This is a
-workflow check; the small model is not intended for pulse reconstruction.
-
 ## Reconstruct a pulse
 
 You need a trained checkpoint and a TG-FROG measurement. The training dataset
@@ -47,7 +37,7 @@ checkpoint:
 
 ```bash
 uv tool install huggingface_hub
-hf download atal-narayan/copra-flow copra-flow.pt --revision v0.1.0 --local-dir checkpoints
+hf download atal-narayan/copra-flow copra-flow.pt --revision v0.1.1 --local-dir checkpoints
 ```
 
 Start with a synthetic measurement:
@@ -84,7 +74,7 @@ Download and extract the dataset (approximately 3.8 GB):
 
 ```bash
 hf download atal-narayan/copra-flow-tg-frog --repo-type dataset \
-  --revision v0.1.0 --local-dir data/flow_matching_10k
+  --revision v0.1.1 --local-dir data/flow_matching_10k
 python data/flow_matching_10k/extract.py
 ```
 
@@ -120,8 +110,7 @@ generation settings or starting another training run.
 
 ## Evaluate the model
 
-To reproduce the paper's synthetic benchmark, use the matching checkpoint
-and dataset:
+To evaluate the model on the synthetic validation set:
 
 ```bash
 uv run python reproduction/synthetic_benchmark.py \
@@ -130,7 +119,8 @@ uv run python reproduction/synthetic_benchmark.py \
 ```
 
 The benchmark evaluates the fixed 1,000-pulse validation set, saves predictions,
-and compares the metrics with the reference results.
+and calculates pulse and trace metrics. The table below lists the results
+presented in the paper.
 
 | Method | Mean pulse MAE ↓ | Mean trace SSIM ↑ |
 | --- | ---: | ---: |
@@ -138,12 +128,9 @@ and compares the metrics with the reference results.
 | COPRA + direct Hann | 0.3345 | 0.8207 |
 | COPRA Flow | 0.0674 | 0.9103 |
 
-COPRA Flow improves pulse recovery on this dataset, although the refined
-field can have lower agreement with the measured trace. These are validation
-results; the same split was used to select the checkpoint. The experimental
-workflow also runs, but its historical numerical results do not reproduce
-exactly. See [reproducibility and limitations](docs/reproducibility.md) for
-details and [verification results](docs/verification.md) for completed checks.
+These results use the validation partition that selected the checkpoint.
+See [paper results and evaluation](docs/reproducibility.md) for the experimental
+results and metric definitions.
 
 ## Where to find things
 

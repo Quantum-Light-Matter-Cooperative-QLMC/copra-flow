@@ -1,6 +1,6 @@
 [project]
 name = "copra-flow"
-version = "0.1.0"
+version = "0.1.1"
 description = "Trace-conditioned flow refinement for TG-FROG ultrafast pulse retrieval."
 readme = "README.md"
 requires-python = ">=3.10,<3.13"

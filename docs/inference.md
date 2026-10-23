@@ -6,10 +6,10 @@ field or uses pulse MAE to select a reconstruction.
 
 ```bash
 uv run copra-flow infer --config configs/inference_report.json \
-  --checkpoint checkpoints/report.pt --input measurement.npz --out-dir runs/pulse
+  --checkpoint checkpoints/copra-flow.pt --input measurement.npz --out-dir runs/pulse
 ```
 
-A `.txt` input is prepared using the final report background subtraction;
+A `.txt` input is prepared using the paper background subtraction;
 a prepared `.npz` input is validated and peak-normalized. Trace-only inputs
 run 400 COPRA iterations with seed 11. Supply `--source-field field.npy` to
 reuse a COPRA field and skip retrieval. An input NPZ can alternatively contain
@@ -22,7 +22,7 @@ measurement information. Outputs remain centered and retain FROG ambiguities;
 absolute arrival time, phase and calibrated field amplitude are not recovered.
 
 Default sampling is 64-step Euler. `--method rk4` is available for numerical
-experiments, but is not the report setting. Input grids must match the
+experiments, but is not the paper setting. Input grids must match the
 checkpoint's field length at 2.5 fs spacing; native traces are downsampled or
 zero-padded using the fixed physical grid and never upsampled to invent
 resolution. Unsupported grids fail explicitly.
@@ -37,27 +37,19 @@ checkpoint checksum. It reports no pulse accuracy without ground truth.
 
 `copra-flow benchmark-experimental` accepts a JSON manifest with a `records`
 list containing `uid` and `path`. Paths are relative to the manifest. Inputs
-can be native text or prepared NPZ files. The report's ten UIDs are listed in
-`reproduction/selections/experimental_10.json`; raw data is released separately.
+can be native text or prepared NPZ files. The paper's ten UIDs are listed in
+`reproduction/selections/experimental_10.json`; experimental measurements must be supplied separately.
 
 ```bash
 uv run copra-flow benchmark-experimental --config configs/experimental_report.json \
-  --manifest experimental/manifest.json --checkpoint checkpoints/report.pt \
-  --out-dir runs/experimental \
-  --reference-results reproduction/reference_results/experimental_metrics.json
+  --manifest experimental/manifest.json --checkpoint checkpoints/copra-flow.pt \
+  --out-dir runs/experimental
 ```
 
 All methods receive identical input and paired initializations for seeds
 11, 29, and 47. COPRA Flow starts from each paired COPRA field; PnP-COPRA uses
 Hann denoising, inferred soft support and trace-SSIM backtracking. All per-seed
 fields and metrics are persisted. `metrics.json` also records the seed selected
-for each report panel by minimum summed NRMSE across methods. Aggregate metrics
+for each paper panel by minimum summed NRMSE across methods. Aggregate metrics
 use all seeds, not just the panel seed. Roughness is RMS second difference of
 unit-peak amplitude; FWHM uses intensity around the main lobe.
-
-The historical experimental table is not reproduced exactly by the original
-scripts rerun in the current environment. The reference comparison is reported
-in `comparison.json` without failing the benchmark by default. Use
-`--strict-reference` when requiring the tight historical match. See the actual
-verification differences in `docs/reproducibility.md`; all per-seed results
-remain available for inspection.

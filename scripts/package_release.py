@@ -40,7 +40,7 @@ def main():
     out = root / "dist"
     out.mkdir(exist_ok=True)
     paths = source_paths(root)
-    archive = out / "copra-flow-v0.1.0.zip"
+    archive = out / "copra-flow-v0.1.1.zip"
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as handle:
         for path in paths:
             handle.write(path, "copra-flow/" + str(path.relative_to(root)))

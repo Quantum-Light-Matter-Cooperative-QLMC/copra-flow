@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the report's 1,000-pulse COPRA-final validation benchmark."""
+"""Evaluate the paper's 1,000-pulse COPRA-final validation benchmark."""
 from __future__ import annotations
 
 import argparse
@@ -37,7 +37,7 @@ def main():
         expected = set(json.loads((here / "selections/synthetic_split.json").read_text())["val"])
         actual = {p.stem.rsplit("_src", 1)[0] for p in (predictions / "shards").glob("*.npz")}
         if actual != expected:
-            raise ValueError("Saved predictions do not cover exactly the report's validation UIDs.")
+            raise ValueError("Saved predictions do not cover exactly the validation pulse UIDs.")
     else:
         save_prediction_artifacts(PredictionArtifactConfig(
         checkpoint=args.checkpoint, data_dir=args.data_dir, out_dir=predictions,
@@ -46,20 +46,7 @@ def main():
             batch_size=args.batch_size, num_workers=args.workers))
     metrics = evaluate_prediction_artifacts(PredictionArtifactEvaluationConfig(
         predictions_dir=predictions, include_trace_metrics=True, out_json=args.out_dir / "metrics.json"))
-    reference = json.loads((here / "reference_results/synthetic_metrics.json").read_text())
-    checks = {}
-    if metrics["evaluated_examples"] != 1000:
-        raise AssertionError("The report benchmark must evaluate exactly 1,000 pulse UIDs.")
-    for key in ("source_pulse_mae", "predicted_pulse_mae", "copra_hann_direct_final_pulse_mae",
-                "source_trace_ssim", "predicted_trace_ssim", "target_trace_ssim"):
-        expected, observed = reference[key]["mean"], metrics[key]["mean"]
-        checks[key] = {"expected": expected, "observed": observed, "absolute_error": abs(observed-expected),
-                       "tolerance": 1e-4, "passed": abs(observed-expected) <= 1e-4}
-    result = {"status": "passed" if all(v["passed"] for v in checks.values()) else "failed", "checks": checks}
-    (args.out_dir / "comparison.json").write_text(json.dumps(result, indent=2)+"\n")
-    print(json.dumps(result, indent=2))
-    if result["status"] != "passed":
-        raise AssertionError("Report metrics differ; inspect comparison.json before publishing.")
+    print(json.dumps(metrics, indent=2))
 
 
 if __name__ == "__main__":

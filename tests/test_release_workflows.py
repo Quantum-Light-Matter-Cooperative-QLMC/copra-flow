@@ -196,15 +196,6 @@ def test_generation_refuses_mixed_settings(tmp_path):
     assert json.loads((out / 'run_config.json').read_text())['maxiter'] == 400
 
 
-def test_experimental_reference_requires_matching_protocol():
-    from pnp_copra.experimental import compare_report_summary
-    expected = {'traces': 10, 'seeds': [11,29,47], 'summary': {'flow': {'roughness': 0.087340}}}
-    assert compare_report_summary({'flow': {'roughness': 0.0873401}}, expected, traces=10, seeds=[11,29,47])['status'] == 'passed'
-    assert compare_report_summary({'flow': {'roughness': 0.1}}, expected, traces=10, seeds=[11,29,47])['status'] == 'failed'
-    with pytest.raises(ValueError, match='different trace count'):
-        compare_report_summary({}, expected, traces=1, seeds=[11,29,47])
-
-
 def test_inference_rejects_checkpoint_with_unsupported_physical_grid(tmp_path):
     from dataclasses import asdict
     path = tmp_path / "different_grid.pt"

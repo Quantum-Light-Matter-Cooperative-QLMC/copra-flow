@@ -76,7 +76,7 @@ def load_measurement(path: Path, checkpoint: Path | None = None) -> dict[str, np
         item["freq_axis"] = freq - carrier
     else:
         raise ValueError("freq_axis must match the checkpoint's relative angular-frequency grid (rad/s).")
-    # A prepared report measurement is already unit-peak. Normalize external inputs identically.
+    # A prepared measurement is already unit-peak. Normalize external inputs identically.
     item["trace_linear"] /= trace.max()
     return item
 
@@ -134,7 +134,7 @@ def infer(input_path: Path, checkpoint: Path, out_dir: Path, *, source_field: Pa
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
-    prepare = sub.add_parser("prepare", help="Apply final-report native trace preprocessing.")
+    prepare = sub.add_parser("prepare", help="Apply native TG-FROG trace preprocessing.")
     prepare.add_argument("--input", type=Path, required=True)
     prepare.add_argument("--out", type=Path, required=True)
     prepare.add_argument("--checkpoint", type=Path)

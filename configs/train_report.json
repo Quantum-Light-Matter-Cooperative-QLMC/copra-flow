@@ -38,7 +38,7 @@
     "max_train_batches": null,
     "max_val_batches": null,
     "num_workers": 4,
-    "out_dir": "runs/report",
+    "out_dir": "runs/copra-flow",
     "seed": 42,
     "validate_every": 1,
     "weight_decay": 0.0001
