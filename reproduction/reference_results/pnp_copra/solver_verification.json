@@ -1,0 +1,12 @@
+[
+  {
+    "uid": "pulse_00682_biexponential_021d98b2",
+    "tolerance": 0.01,
+    "exact_stock_field_and_metrics": true
+  },
+  {
+    "uid": "pulse_09360_random_mixture_cb2bc81a",
+    "tolerance": 0.02,
+    "exact_stock_field_and_metrics": true
+  }
+]

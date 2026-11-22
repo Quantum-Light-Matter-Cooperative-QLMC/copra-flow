@@ -10,6 +10,7 @@ reconstruction for each pulse, and 64 Euler refinement steps.
 | Method | Mean pulse MAE ↓ | Mean trace SSIM ↑ |
 | --- | ---: | ---: |
 | COPRA | 0.468531 | 0.970920 |
+| PnP-COPRA | 0.410690 | 0.946159 |
 | COPRA + direct Hann | 0.334460 | 0.820689 |
 | COPRA Flow | 0.067425 | 0.910295 |
 
@@ -18,6 +19,12 @@ The validation partition was used for checkpoint selection. Pulse MAE compares
 complex fields after resolving circular shift, complex scaling, and
 conjugate-reversal ambiguities. Trace SSIM uses global image statistics on
 independently peak-normalized traces.
+
+The synthetic PnP-COPRA comparison uses the same measured traces and paired
+initializations as COPRA. A 50-pulse tolerance pilot selected `accept_tol=0.01`;
+the setting was then fixed for all 1,000 pulses. Mean pulse MAE was 0.411339
+on the 950 pulses outside the pilot. See the [PnP-COPRA guide](pnp_copra.md)
+for the acceptance equation, commands, and saved per-pulse results.
 
 ## Experimental TG-FROG measurements
 

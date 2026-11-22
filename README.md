@@ -148,10 +148,14 @@ presented in the paper.
 | Method | Mean pulse MAE ↓ | Mean trace SSIM ↑ |
 | --- | ---: | ---: |
 | COPRA | 0.4685 | 0.9709 |
+| PnP-COPRA | 0.4107 | 0.9462 |
 | COPRA + direct Hann | 0.3345 | 0.8207 |
 | COPRA Flow | 0.0674 | 0.9103 |
 
 These results use the validation partition that selected the checkpoint.
+PnP-COPRA uses in-loop Hann smoothing with a 1% relative trace-SSIM
+backtracking tolerance, selected on a fixed 50-pulse pilot. Its benchmark
+runner and saved results are described in the [PnP-COPRA guide](docs/pnp_copra.md).
 See [paper results and evaluation](docs/reproducibility.md) for the experimental
 results and metric definitions.
 

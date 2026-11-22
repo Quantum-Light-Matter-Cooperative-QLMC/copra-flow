@@ -1,0 +1,34 @@
+{
+  "method": "In-loop PnP-COPRA; pyPret original best-trace-error output",
+  "parameters": {
+    "accept_tol": 0.01,
+    "maxiter": 400,
+    "alpha": 0.25,
+    "initial_mixing": 0.7,
+    "minimum_mixing": 0.05,
+    "backtracking_factor": 0.5,
+    "hann_amplitude_fraction": 0.08,
+    "hann_phase_fraction": 0.1
+  },
+  "pilot_selection": "../../selections/pnp_copra_pilot.json",
+  "validation_selection": "../../selections/synthetic_split.json",
+  "final_trace_ssim_floor": 0.3,
+  "final_trace_ssim_floor_role": "Reporting check only; no output replacement or rejection.",
+  "count_improved_vs_copra": 884,
+  "runtime": {
+    "python": "3.12.2",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "torch": "2.5.1",
+    "backend": "scalar DUCC FFTs with identical-spectrum caching"
+  },
+  "retrieval_sha256": "36d5a12a0308e70cd9b5d8aa25a97a02c3f3181429af07f29bbf4c3bfa76e1f4",
+  "files_sha256": {
+    "full_summary.json": "3d23394aba51fcbecb0a61edd7a008bc2ce48f5c43f3c6ecb39b504e68f917ff",
+    "full_per_pulse.csv": "d33121ce5f8f37aeb534354f5260fc1b6f740c6a6010bdbe4c1f371b50286fbb",
+    "pilot_summary.json": "b63f82f865705fe1ae8637ee6583cbe4b58384e81988fe6ad1726ebb9de28d1f",
+    "pilot_fine_summary.json": "28df92f60938c48a02af147b31694dbb463600ad916f4837f9fa7f28f0a95340",
+    "pilot_fine_per_pulse.csv": "266f0a42891dd68686168744a1f05ea37c46a8bf3d0acdc3eb41b4bf0d61c92f",
+    "solver_verification.json": "d3aa69148621f8a643bd0cddc9d7879bbda552bf633d2e16d7358997ff0d3599"
+  }
+}
