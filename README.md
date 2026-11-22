@@ -13,6 +13,8 @@ and [training dataset](https://huggingface.co/datasets/atal-narayan/copra-flow-t
 are available on Hugging Face. See the [download guide](docs/downloads.md)
 for versioned downloads, checksums, and dataset extraction.
 
+**Code archive:** [COPRA Flow v0.2](https://doi.org/10.5281/zenodo.24445042).
+
 ## Pulse evolution
 
 Watch COPRA Flow refine representative synthetic pulses. The left panels show

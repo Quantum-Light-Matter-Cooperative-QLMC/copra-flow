@@ -4,6 +4,7 @@ title: "COPRA Flow: Trace-Conditioned Flow Refinement for Robust Ultrafast Pulse
 type: software
 version: 0.2.0
 date-released: 2026-11-22
+doi: 10.5281/zenodo.24445042
 doi: 10.5281/zenodo.23676904
 url: https://github.com/Quantum-Light-Matter-Cooperative-QLMC/copra-flow/releases/tag/v0.2
 authors:
