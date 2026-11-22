@@ -13,7 +13,13 @@ and [training dataset](https://huggingface.co/datasets/atal-narayan/copra-flow-t
 are available on Hugging Face. See the [download guide](docs/downloads.md)
 for versioned downloads, checksums, and dataset extraction.
 
-**Code archive:** [COPRA Flow v0.2](https://doi.org/10.5281/zenodo.24445042).
+Citable `v0.2` releases:
+
+| Resource | DOI |
+| --- | --- |
+| Code archive | [10.5281/zenodo.24445042](https://doi.org/10.5281/zenodo.24445042) |
+| Model checkpoint | [10.57967/hf/11789](https://doi.org/10.57967/hf/11789) |
+| Synthetic dataset | [10.57967/hf/11790](https://doi.org/10.57967/hf/11790) |
 
 ## Pulse evolution
 

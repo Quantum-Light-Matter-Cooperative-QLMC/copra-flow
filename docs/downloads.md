@@ -68,3 +68,7 @@ documentation while preserving the checkpoint and dataset files. For an experime
 specific snapshot, record the resolved Hugging Face commit alongside your
 settings and results. Updating code on GitHub does not change these artifact
 files.
+
+The corrected `v0.2` snapshots have dedicated DOIs for the
+[model checkpoint](https://doi.org/10.57967/hf/11789) and
+[synthetic dataset](https://doi.org/10.57967/hf/11790).
