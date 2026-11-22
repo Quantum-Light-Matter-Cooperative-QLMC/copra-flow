@@ -10,7 +10,7 @@ uv tool install huggingface_hub
 ## Model
 
 ```bash
-hf download atal-narayan/copra-flow --revision v0.1.1 --local-dir checkpoints
+hf download atal-narayan/copra-flow --revision v0.2 --local-dir checkpoints
 ```
 
 Use `checkpoints/copra-flow.pt` for inference. The complete model download also
@@ -25,7 +25,7 @@ by `copra-flow`, rather than a Transformers model.
 
 ```bash
 hf download atal-narayan/copra-flow-tg-frog --repo-type dataset \
-  --revision v0.1.1 --local-dir data/flow_matching_10k
+  --revision v0.2 --local-dir data/flow_matching_10k
 python data/flow_matching_10k/extract.py
 uv run copra-flow inspect --data-dir data/flow_matching_10k
 ```
@@ -63,7 +63,8 @@ shasum -a 256 -c SHA256SUMS
 On Linux, use `sha256sum -c SHA256SUMS`. Dataset extraction additionally verifies
 every extracted shard against `inventory.json`.
 
-The commands pin the `v0.1.1` artifact release. For an experiment that needs a
+The commands pin the `v0.2` artifact release, which adds corrected benchmark
+documentation while preserving the checkpoint and dataset files. For an experiment that needs a
 specific snapshot, record the resolved Hugging Face commit alongside your
 settings and results. Updating code on GitHub does not change these artifact
 files.

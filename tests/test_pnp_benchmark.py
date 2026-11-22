@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
 import sys
 
@@ -59,3 +60,25 @@ def test_reusing_tolerance_trajectories_preserves_independent_results():
         independent = benchmark.retrieve(context, initial, rng_state, config, tolerance)
         np.testing.assert_array_equal(independent._result.spectrum, primary._result.spectrum)
         np.testing.assert_array_equal(independent.last_spectrum, primary.last_spectrum)
+
+
+@pytest.mark.parametrize("config_name", ["run_config.json", "generation_config.json"])
+def test_benchmark_loads_local_and_published_dataset_layouts(tmp_path, monkeypatch, config_name):
+    data, predictions, reproduction = [tmp_path / name for name in ("data", "predictions", "reproduction")]
+    data.mkdir()
+    predictions.mkdir()
+    (reproduction / "selections").mkdir(parents=True)
+    uids = ["pulse_a", "pulse_b"]
+    config = {"seed": 42, "noise": 0.01, "maxiter": 400, "alpha": 0.25}
+    (data / config_name).write_text(json.dumps(config))
+    (data / "manifest.json").write_text(json.dumps({"specs": [
+        {"uid": uid, "family": "gaussian", "params": {}} for uid in uids
+    ]}))
+    (predictions / "manifest.json").write_text(json.dumps({"records_written_this_run": [
+        {"uid": uid, "path": f"shards/{uid}.npz"} for uid in uids
+    ]}))
+    (reproduction / "selections/synthetic_split.json").write_text(json.dumps({"val": uids}))
+    monkeypatch.setattr(benchmark, "HERE", reproduction)
+    records, loaded = benchmark.load_records(data, predictions)
+    assert [record.uid for record in records] == uids
+    assert loaded == config

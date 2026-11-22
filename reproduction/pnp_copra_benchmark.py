@@ -193,6 +193,12 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def generation_config_path(data_dir: Path) -> Path:
+    """Support locally generated datasets and the published Hugging Face layout."""
+    local = data_dir / "run_config.json"
+    return local if local.is_file() else data_dir / "generation_config.json"
+
+
 def load_records(data_dir: Path, predictions_dir: Path, pilot: bool = False):
     predictions = read_json(predictions_dir / "manifest.json")["records_written_this_run"]
     specs = {item["uid"]: item for item in read_json(data_dir / "manifest.json")["specs"]}
@@ -207,7 +213,7 @@ def load_records(data_dir: Path, predictions_dir: Path, pilot: bool = False):
     selected = read_json(HERE / "selections/pnp_copra_pilot.json")["uids"] if pilot else sorted(expected)
     if len(selected) != len(set(selected)) or not set(selected) <= expected:
         raise ValueError("The pilot must contain unique validation pulse UIDs.")
-    return [records[uid] for uid in selected], read_json(data_dir / "run_config.json")
+    return [records[uid] for uid in selected], read_json(generation_config_path(data_dir))
 
 
 def set_backend(context, backend):
@@ -344,7 +350,7 @@ def main(argv=None):
     signature = {
         "dataset_manifest_sha256": sha256(args.data_dir / "manifest.json"),
         "prediction_manifest_sha256": sha256(args.predictions_dir / "manifest.json"),
-        "dataset_config_sha256": sha256(args.data_dir / "run_config.json"),
+        "dataset_config_sha256": sha256(generation_config_path(args.data_dir)),
         "retrieval_sha256": sha256(Path(retrieval.__file__)),
         "benchmark_sha256": sha256(Path(__file__)),
         "backend_sha256": sha256(HERE / "pnp_copra_backend.py"),

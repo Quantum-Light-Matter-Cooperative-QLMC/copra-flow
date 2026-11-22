@@ -60,7 +60,7 @@ checkpoint:
 
 ```bash
 uv tool install huggingface_hub
-hf download atal-narayan/copra-flow copra-flow.pt --revision v0.1.1 --local-dir checkpoints
+hf download atal-narayan/copra-flow copra-flow.pt --revision v0.2 --local-dir checkpoints
 ```
 
 Start with a synthetic measurement:
@@ -97,7 +97,7 @@ Download and extract the dataset (approximately 3.8 GB):
 
 ```bash
 hf download atal-narayan/copra-flow-tg-frog --repo-type dataset \
-  --revision v0.1.1 --local-dir data/flow_matching_10k
+  --revision v0.2 --local-dir data/flow_matching_10k
 python data/flow_matching_10k/extract.py
 ```
 
